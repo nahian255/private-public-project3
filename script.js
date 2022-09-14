@@ -1,3 +1,6 @@
+
+// .....get element  part...........
+
 const display = document.getElementById('display');
 const question = document.getElementById('question');
 const startBtn = document.getElementById('start');
@@ -5,25 +8,27 @@ const countdownOverlay = document.getElementById('countdown');
 const resultModal = document.getElementById('result');
 const modalBackground = document.getElementById('modal-background');
 
-// variables
+// variables..............
 let userText = '';
 let errorCount = 0;
 let startTime;
 let questionText = '';
 
-// Load and display question
+// Load and display question...........
 fetch('./texts.json')
   .then((res) => res.json())
   .then((data) => {
     questionText = data[Math.floor(Math.random() * data.length)];
+
     question.innerHTML = questionText;
   });
 
-// checks the user typed character and displays accordingly
+
+// checks the user typed character and displays accordingly........
 const typeController = (e) => {
   const newLetter = e.key;
 
-  // Handle backspace press
+  // Handle backspace press...............
   if (newLetter == 'Backspace') {
     userText = userText.slice(0, userText.length - 1);
     return display.removeChild(display.lastChild);
@@ -126,13 +131,13 @@ const start = () => {
   }, 1000);
 };
 
-// START Countdown
+// START Countdown...........
 startBtn.addEventListener('click', start);
 
-// If history exists, show it
+// If history exists, show it................
 displayHistory();
 
-// Show typing time spent
+// Show typing time spent................
 setInterval(() => {
   const currentTime = new Date().getTime();
   const timeSpent = Math.floor((currentTime - startTime) / 1000);
